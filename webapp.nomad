@@ -16,7 +16,7 @@ job "demo-webapp" {
 
       tags = [
         "traefik.enable=true",
-        "traefik.http.routers.http.rule=Host(`myapp.local`)",
+        "traefik.http.routers.http.rule=Host(`myapp.lan`)",
       ]
 
       check {
