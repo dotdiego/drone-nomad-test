@@ -1,0 +1,11 @@
+kind: pipeline
+type: docker
+name: default
+
+steps:
+- name: publish
+  image: loq9/drone-nomad
+  network_mode: bridge
+  settings:
+    addr: http://http.nomad-servers.service.consul:4646
+    template: webapp.nomad
