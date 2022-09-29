@@ -3,8 +3,14 @@ type: docker
 name: default
 
 steps:
+- name: render file
+  image: hashicorp/levant
+  commands:
+    - levant render webapp.nomad > webapp.nomad.rendered 
+
 - name: publish
   image: loq9/drone-nomad
   settings:
     addr: http://nomad-servers.service.consul:4646
-    template: webapp.nomad
+    template: webapp.nomad.rendered
+    watch_deployment: true

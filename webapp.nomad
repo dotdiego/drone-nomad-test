@@ -1,11 +1,17 @@
 job "demo-webapp" {
-  datacenters = ["dc1"]
+  datacenters = ["[[ .datacenter ]]"]
+
+constraint {
+  operator = "!="
+  attribute = "${node.unique.name}"
+  value = "metal1"
+}
 
   group "demo" {
     count = 2
 
     network {
-      port  "http"{
+      port "http" {
         to = -1
       }
     }
@@ -16,7 +22,8 @@ job "demo-webapp" {
 
       tags = [
         "traefik.enable=true",
-        "traefik.http.routers.http.rule=Host(`myapp.lan`)",
+        "traefik.http.routers.myapp.rule=Host(`myapp.[[ .lantld ]]`)",
+        "traefik.http.routers.myapp.entrypoints=web",
       ]
 
       check {
