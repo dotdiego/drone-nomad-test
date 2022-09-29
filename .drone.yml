@@ -5,6 +5,7 @@ name: default
 steps:
 - name: render file
   image: hashicorp/levant
+  user: root
   commands:
     - levant render webapp.nomad > webapp.nomad.rendered 
 
